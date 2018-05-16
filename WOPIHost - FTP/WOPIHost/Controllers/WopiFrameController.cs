@@ -10,7 +10,11 @@ namespace WOPIHost.Controllers
 {
     public class WopiFrameController : Controller
     {
-        // GET: WopiFrame
+        /// <summary>
+        /// GET: WopiFrame
+        /// </summary>
+        /// <param name="id">File name</param>
+        /// <returns>A ViewResult object</returns>
         public ActionResult Index(string id)
         {
             string sourceDoc = id.ToLower();

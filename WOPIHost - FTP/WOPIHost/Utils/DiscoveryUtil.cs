@@ -16,6 +16,10 @@ namespace WOPIHost.Utils
 {
     public class DiscoveryUtil
     {
+        /// <summary>
+        /// Get WOPI actions
+        /// </summary>
+        /// <returns>List of actions</returns>
         public static List<WopiAction> GetDiscoveryInfo()
         {
             List<WopiAction> actions = new List<WopiAction>();
@@ -65,15 +69,18 @@ namespace WOPIHost.Utils
             return actions;
         }
 
+
+        /// <summary>
+        /// Get action URL of a file
+        /// </summary>
+        /// <param name="action">The action</param>
+        /// <param name="fileName">File name</param>
+        /// <returns>The URL</returns>
         public static string GetActionUrl(WopiAction action, string fileName)
         {
             string urlSrc = action.urlsrc;
 
             string access_token = AccessTokenUtil.WriteToken(AccessTokenUtil.GenerateToken(Environment.UserName, fileName.ToLower()));
-
-            //urlSrc = string.Format("{0}WOPISrc={1}&access_token=fdsaf", 
-            //    urlSrc.Substring(0, urlSrc.IndexOf('<')),
-            //    HttpUtility.UrlEncode(string.Format("http://{0}/wopi/files/{1}", ConfigurationManager.AppSettings["WOPIServerName"], HttpUtility.UrlEncode(fileName))));
 
             urlSrc = string.Format("{0}WOPISrc={1}",
                 urlSrc.Substring(0, urlSrc.IndexOf('<')),

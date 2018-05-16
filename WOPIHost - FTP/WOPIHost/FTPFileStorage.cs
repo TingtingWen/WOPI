@@ -14,6 +14,11 @@ namespace WOPIHost
         private string username = ConfigurationManager.AppSettings["FileServiceUserName"];
         private string password = ConfigurationManager.AppSettings["FileServiceUserPassword"];
 
+        /// <summary>
+        /// Get file size.
+        /// </summary>
+        /// <param name="name">File name</param>
+        /// <returns>File size</returns>
         public long GetFileSize(string name)
         {
             try
@@ -34,6 +39,11 @@ namespace WOPIHost
             }
         }
 
+        /// <summary>
+        /// Get file last modified time.
+        /// </summary>
+        /// <param name="name">File name</param>
+        /// <returns>File last modified time</returns>
         public DateTime? GetLastModifiedTime(string name)
         {
             try
@@ -54,6 +64,11 @@ namespace WOPIHost
             }
         }
 
+        /// <summary>
+        /// Get file stream.
+        /// </summary>
+        /// <param name="name">File name</param>
+        /// <returns>File stream</returns>
         public Stream GetFile(string name)
         {
             try
@@ -71,6 +86,12 @@ namespace WOPIHost
             }
         }
 
+        /// <summary>
+        /// Upload file.
+        /// </summary>
+        /// <param name="name">File name</param>
+        /// <param name="stream">File stream</param>
+        /// <returns>Return 0 if success; Otherwise, return -1</returns>
         public int UploadFile(string name, Stream stream)
         {
             try
@@ -94,6 +115,10 @@ namespace WOPIHost
             return 0;
         }
 
+        /// <summary>
+        /// Get file name list.
+        /// </summary>
+        /// <returns>File name list</returns>
         public List<string> GetFileNames()
         {
             List<string> result = new List<string>();

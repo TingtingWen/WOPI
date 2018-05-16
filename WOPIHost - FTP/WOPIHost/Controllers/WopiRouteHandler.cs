@@ -6,6 +6,9 @@ using System.Web.Routing;
 
 namespace WOPIHost.Controllers
 {
+    /// <summary>
+    /// A route handler
+    /// </summary>
     public class WopiRouteHandler : IRouteHandler
     {
         public IHttpHandler GetHttpHandler(RequestContext requestContext)

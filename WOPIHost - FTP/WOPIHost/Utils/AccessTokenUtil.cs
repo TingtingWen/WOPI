@@ -8,11 +8,20 @@ using System.Xml;
 using System.Web;
 namespace WOPIHost.Utils
 {
+    /// <summary>
+    /// A class to generate and validate access token
+    /// </summary>
     public class AccessTokenUtil
     {
         private const string sec = "ProEMLh5e_qnzdNUQrqdHPgp";
         private const string sec1 = "ProEMLh5e_qnzdNU";
-
+        
+        /// <summary>
+        /// Generate the token
+        /// </summary>
+        /// <param name="user">User name</param>
+        /// <param name="docId">File name</param>
+        /// <returns>The token</returns>
         public static JwtSecurityToken GenerateToken(string user, string docId)
         {
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(sec));
@@ -35,6 +44,12 @@ namespace WOPIHost.Utils
             return jwtSecurityToken;
         }
 
+        /// <summary>
+        /// Validate the token
+        /// </summary>
+        /// <param name="tokenString">The token string</param>
+        /// <param name="docId">File name</param>
+        /// <returns>Return true if success; Otherwise, return false</returns>
         public static bool ValidateToken(string tokenString, string docId)
         {
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(sec));
@@ -74,6 +89,11 @@ namespace WOPIHost.Utils
             }
         }
 
+        /// <summary>
+        /// Get user name from token string
+        /// </summary>
+        /// <param name="tokenString">The token string</param>
+        /// <returns>The user name</returns>
         public static string GetUserFromToken(string tokenString)
         {
             // Initialize the token handler and validation parameters
@@ -112,12 +132,23 @@ namespace WOPIHost.Utils
             }
         }
 
+        /// <summary>
+        /// Get token string
+        /// </summary>
+        /// <param name="token">The token</param>
+        /// <returns>The token string</returns>
         public static string WriteToken(JwtSecurityToken token)
         {
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
             return handler.WriteToken(token);
         }
 
+        /// <summary>
+        /// Get user permission
+        /// </summary>
+        /// <param name="username">User name</param>
+        /// <param name="docid">File name</param>
+        /// <returns>The user permission</returns>
         public static string readUserXml(string username, string docid)
         {
             string permission = "write";
@@ -151,19 +182,6 @@ namespace WOPIHost.Utils
             }
 
             return permission;
-        }
-
-        public static string validUserPermission(string tokenString, string docid)
-        {
-            string userPermission = "";
-            string userName = "";
-            if (ValidateToken(tokenString, docid))
-            {
-                userName = GetUserFromToken(tokenString);
-                userPermission = readUserXml(userName, docid);
-            }
-
-            return userPermission;
         }
     }
 }

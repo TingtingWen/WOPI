@@ -15,6 +15,10 @@ namespace WOPIHost.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Get the file names with link on it
+        /// </summary>
+        /// <returns>A JsonResult object</returns>
         public ActionResult GetFileList()
         {
             List<FileLink> files = GetFiles();
@@ -22,6 +26,10 @@ namespace WOPIHost.Controllers
             return Json(serializer.Serialize(files), JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Get the file names with link on it
+        /// </summary>
+        /// <returns>The file names with link</returns>
         public List<FileLink> GetFiles()
         {
             List<FileLink> files = new List<FileLink>();
